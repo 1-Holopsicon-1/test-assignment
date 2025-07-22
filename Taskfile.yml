@@ -1,0 +1,17 @@
+# ./Taskfile.yml.yaml
+# See: https://taskfile.dev/api/
+
+version: "3"
+tasks:
+  posgresql:
+    aliases:
+      - psql
+    desc: "Create docker container for Postgres"
+    cmds:
+      - docker run  -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pw -e POSTGRES_DB=main --name Subscriptions -dp 1515:5432 postgres:latest
+  swagger:
+    aliases:
+      - swg
+    desc: "generate swagger"
+    cmds:
+      - ~/go/bin/swag init -g internal/app/handler/docs.go -o docs --parseDependency --parseInternal
